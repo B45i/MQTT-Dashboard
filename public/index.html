@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>MQTT Dashboard</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+
+<body>
+	<section class="section">
+		<div class="container">
+			<div class="field">
+				<p class="control has-icons-left has-icons-right">
+					<input id="topic" class="input" type="text" placeholder="Topic">
+					<span class="icon is-small is-left">
+						<i class="fas fa-bezier-curve"></i>
+					</span>
+				</p>
+			</div>
+			<div class="field">
+				<p class="control has-icons-left">
+					<input id="message" class="input" type=text placeholder="Message">
+					<span class="icon is-small is-left">
+						<i class="fas fa-envelope"></i>
+					</span>
+				</p>
+			</div>
+			<div class="field">
+				<p class="control">
+					<button onclick="publishMessage()" class="button is-success">
+						Publish
+					</button>
+				</p>
+			</div>
+			<div class="field">
+				<div class="control is-small is-loading">
+					<textarea id="messageLog" readonly class="textarea is-small is-info" placeholder="Log"></textarea>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer class="footer">
+		<div class="content has-text-centered">
+			<p>
+				<strong>MQTT Dashboard</strong> by <a href="https://github.com/B45i">B45i</a>.
+			</p>
+		</div>
+	</footer>
+
+	<script src="/mqtt.js"></script>
+	<script>
+		var client = mqtt.connect();
+		client.publish("mqtt/", "Client Connected");
+		client.subscribe("#");
+
+		client.on("message", function (topic, payload) {
+			let messageLog = document.getElementById('messageLog');
+			messageLog.value += `* Payload ${payload} published to ${topic} on ${new Date()}\n`;
+		});
+
+		function publishMessage() {
+			let topic = document.getElementById('topic').value;
+			let message = document.getElementById('message').value;
+			console.log(`Topic: ${topic}, Message: ${message}`);
+			client.publish(topic, message);
+		}
+	</script>
+</body>
+
+</html>
