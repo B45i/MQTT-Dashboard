@@ -24,5 +24,5 @@ server.on('published', (packet, client) => {
 
 // Server is Ready
 server.on('ready', () => {
-	console.log('Mosca server is up and running');
+	console.log(`Mosca server is up and running on port ${port}`);
 });
