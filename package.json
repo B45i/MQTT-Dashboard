@@ -1,15 +1,24 @@
 {
-  "name": "mqtt-server",
+  "name": "node-mqtt-server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Very simple MQTT dashboard written in mosca and MQTT.js. Works over websocket so that it can be hosted to service like heroku.",
+  "main": "app.js",
+  "dependencies": {
+    "mosca": "^2.8.3"
+  },
+  "devDependencies": {},
   "scripts": {
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/B45i/MQTT-Dashboard.git"
+  },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "mosca": "^2.8.3"
-  }
+  "bugs": {
+    "url": "https://github.com/B45i/MQTT-Dashboard/issues"
+  },
+  "homepage": "https://github.com/B45i/MQTT-Dashboard#readme"
 }
