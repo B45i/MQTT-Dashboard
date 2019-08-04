@@ -6,8 +6,7 @@ const port = process.env.PORT || 3000;
 const moscaSettings = {
 	http: {
 		port: port,
-		bundle: true,
-		static: './public'
+		bundle: true
 	}
 };
 
@@ -24,5 +23,6 @@ server.on('published', (packet, client) => {
 
 // Server is Ready
 server.on('ready', () => {
+	console.log(`process.env.PORT: ${process.env.PORT}`);
 	console.log(`Mosca server is up and running on port ${port}`);
 });
